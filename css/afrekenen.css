@@ -1,0 +1,54 @@
+table {
+    width: 90%;
+    margin: 2em auto;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: center;
+    width: 40%;
+}
+
+
+
+
+table#winkelwagen td{
+    background-color: white;
+    width: auto;
+}
+table#winkelwagen th {
+    color: white;
+    background-color: gray;
+    font-size: 1.1em;
+    padding: 0.6em 0.2em;
+}
+
+table#winkelwagen img {
+	width:35%;
+}
+
+#content img {
+	margin: 0;
+}
+
+.buttons {
+    margin: 2em;
+    text-align: right;
+}
+
+.buttons a{
+    color: white;
+    background: gray;
+    text-decoration: none;
+    padding: .5em 1em;
+}
+
+#content label {
+    background: white;
+    padding: 0.5em 1em;
+
+}

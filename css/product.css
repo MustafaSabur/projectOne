@@ -1,0 +1,80 @@
+#Overzicht {
+	width: 100%;
+	margin: auto;
+	
+}
+
+#foto {
+	display: inline-block;
+	vertical-align: top;
+	text-align: left;
+	width: 40%;
+}
+
+
+#beschrijving {
+	display: inline-block;
+	width: 50%;
+	vertical-align: top;
+	margin: 2em;
+	text-align: left;
+}
+
+#toevoegen {
+	text-align: right;
+	margin: 2em;
+}
+
+#toevoegen a{
+	color: white;
+	background: gray;
+	text-decoration: none;
+	padding: .5em 1em;
+
+}
+
+.product {
+	display: inline-block;
+	width: 33%;
+	margin: 2em 0em;
+	z-index:3;
+
+}
+
+#terug {
+
+	margin: 2em 2em 0em;
+	text-align: left;
+}
+
+#terug a{
+	color: white;
+	background: gray;
+	text-decoration: none;
+	padding: .5em 1em;
+
+}
+
+
+
+.product button{
+
+	margin: 1em 0em;
+	padding: 1em;
+	z-index: 0;
+}
+
+.product p {
+	max-width: 80%;
+	min-height: 3em;
+	font-size: 80%;
+	text-align: center;
+	text-transform: uppercase;
+	position: relative;
+}
+
+h2 {
+	text-transform: uppercase;
+	background: gray;
+	margin: 2em 2em 0em;
+}

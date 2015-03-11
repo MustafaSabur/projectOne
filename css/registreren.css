@@ -1,0 +1,32 @@
+
+form.registreren {
+	margin: 1em 3em;
+}
+
+form.registreren input {
+    width: 20em;
+    color: #505050;
+    
+    margin: 0.5em 1em;
+}
+
+form.registreren p {
+
+	text-align: right;
+}
+
+form.registreren input.jaar {
+	width: 5em;
+}
+
+form.registreren input.radio {
+	width: 2em;
+	margin: 0;
+
+}
+
+form.registreren input.checkbox {
+	width: 2em;
+	margin: 0;
+
+}

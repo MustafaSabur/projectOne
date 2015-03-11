@@ -1,0 +1,209 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+
+body {
+	background: url("../images/bg.png") repeat;
+	font-family: sans-serif;
+	font-size: 100%;
+	margin: 1em 1em 2em;
+	min-width: 900px;
+	
+}
+
+#main {
+	max-width: calc(100% - 165px);
+}
+
+#header {
+	background-color:rgba(100,100,100,0.7);
+	height: 5em;
+	left: 1em;
+	position: fixed;
+	top: 1em;
+	width: calc(100% - 196px);
+	z-index: 5;
+}
+
+img {
+	max-width: 100% ;
+}
+#logo {
+	display:inline-block;
+	vertical-align: top;
+	min-width: 20%;
+}
+
+#logo img {
+	width: 10em;
+}
+
+#login {
+	color: #DDDDDD;
+	display: inline-block;
+	line-height: 1.2em;
+	padding: 1px 1em;
+	position: absolute;
+	right: 0px;
+	top: -10px;
+	vertical-align: top;
+	width: 345px;
+}
+
+.logintext {
+	width: 140px;
+}
+
+.loginsubmit {
+	width: 45px;
+}
+
+#login h4 {
+	float: right;
+	display: inline;
+	word-spacing: .4em;
+	font-size : .8em;
+}
+
+#login h5 {
+	float: right;
+	color: darkred;
+	padding-top: 1em;
+}
+
+#login a {
+	text-decoration: none;
+}
+
+#login a:hover {
+	text-decoration: underline;
+	
+}
+
+#ads {
+	
+	font-size: 1em;
+	width: 160px;
+	margin: 1em;
+	position: fixed;
+	top: 0;
+	right: 0;
+}
+
+#ads p {
+	text-align: center;
+}
+
+#menu {
+	margin: auto;
+	text-align: center;
+}
+
+.optie {
+	display: inline-block;
+	margin-top: 5.5em;	
+	vertical-align: top;
+	width: 18%;
+}
+
+.optie a:hover {
+	background-color:#BBBBBB;
+}
+
+.optie a:active {
+	background-color:#DDDDDD;
+}
+
+
+.submenu {
+	display: none;
+}
+
+.optie:hover .submenu {
+	display:block;
+	position: absolute;
+	width: 15.8%;
+}
+
+.optie a {
+	background-color: #999999;
+	border: 1px solid #CCCCCC;
+	color: black;
+	display: block;
+	text-decoration: none;
+	
+}
+
+li {
+	padding: 0px;
+}
+
+ul {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+}
+
+#content {
+	background-color: rgba(255,255,255,0.6);
+	font-family: Arial;
+	margin: 1em auto;
+	text-align: center;
+	width: 80%;
+}
+
+#content h1 {
+	padding: 1em 2em 0em;
+	background-color: white;
+}
+
+#content h2, h3 {
+	padding-top: 1em;
+}
+
+#content p {
+	margin: 0em 3em;
+}
+
+#content img {
+	width: calc(100% - 4em);
+	margin: 2em;
+}
+
+#googleMap {
+	width: calc(100% - 4em);
+	margin: 2em;
+	height: 20em;
+}
+
+#footer {
+	background-color: rgba(200,200,200,.7);
+	bottom: 0px;
+	height: 2em;
+	left: 0px;
+	margin: 0px 1em;
+	position: fixed;
+	text-align: right;
+	width: calc(100% - 2em);
+}
+
+#footer p {
+	text-align: left;
+	font-size: 80%;
+}
+
+#socialMedia {
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+
+}
+
+.socialMediaIcon{
+	width: 35px;
+	height: 35px;
+}
+
+

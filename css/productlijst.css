@@ -1,0 +1,59 @@
+
+#content img {
+	margin: 0;
+}
+
+#content h3 {
+	color: #666666;
+	text-decoration: underline;
+}
+
+.catogorie {
+	display: inline-block;
+	width: 33%;
+	margin-top: 1em;
+}
+
+.catogorie a{
+	color: white;
+	background: gray;
+	text-decoration: none;
+	padding: .5em 1em;
+}
+
+.product {
+	display: inline-block;
+	width: 33%;
+	margin: 2em 0em;
+	z-index:3;
+
+}
+
+
+
+.product button{
+
+	margin: 1em 0em;
+	padding: 1em;
+	z-index: 0;
+}
+
+.product p {
+	max-width: 80%;
+	min-height: 3em;
+	font-size: 80%;
+	text-align: center;
+	text-transform: uppercase;
+	position: relative;
+}
+
+.zoekfunctie {
+	text-align: left;
+
+}
+
+.nPerPagina {
+	text-align: left;
+	font-size: 0.5em;
+	margin-left: 20px;
+}
