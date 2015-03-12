@@ -41,7 +41,9 @@ function printProductenPagina($conn) {
             echo '<h3>';
             echo  $row['MERK'];
             echo '</h3>';
-            echo '<a href="productpagina.php"><img  src="';
+            echo '<a href="productpagina.php&#63;id=';
+            echo $row['PRODUCTNUMMER'];
+            echo '"><img  src="';
             echo $row['AFBEELDING_GROOT'];
             echo '" alt="calvin-pantalon"></a>';
             echo '<p>';
