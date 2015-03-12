@@ -26,7 +26,7 @@
             <h1>Winkel</h1>
             <div id="terug"><a href="productlijst.php"> Terug</a></div>
             <div id="overzicht">
-                <?php $product = returnProduct(dbConnected(),$_GET['id']) ?>
+                <?php $product = returnProduct($_GET['id']) ?>
 
                 <div><h2>  <?php echo $product['PRODUCTNAAM']; ?></h2></div>
                 <div id="foto"><img src="<?php echo $product['AFBEELDING_GROOT']; ?>" alt="calvin-pantalon"></div>
@@ -42,7 +42,7 @@
 
             </div>
             <h2> Zie ook </h2>
-            <?php getGerelateerdeProduct(dbConnected(),$_GET['id']); ?>
+            <?php getGerelateerdeProduct($_GET['id']); ?>
         </div>
     </div>
     <?php include 'includes/ads.php'; ?>

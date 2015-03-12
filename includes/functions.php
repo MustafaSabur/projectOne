@@ -27,11 +27,10 @@ function login($user, $password, $conn) {
 	}
 }
 
-function printProductenPagina($conn) {
-
+function printProductenDiv($tsql){
+    $conn = dbConnected();
     if($conn){
 
-        $tsql = "SELECT * from PRODUCT";
         $result = sqlsrv_query( $conn, $tsql, null);
         if ( $result === false){
             die( print_r( sqlsrv_errors() ) );
@@ -53,22 +52,40 @@ function printProductenPagina($conn) {
             echo $row['PRIJS'];
             echo '</span> <button type="button" >In Winkelwagen</button></p>';
             echo '</div>';
-            $productcode = $row['PRODUCTNUMMER'];
-            $_SESSION['productcode']= $productcode;
         }
         sqlsrv_free_stmt($result);
         sqlsrv_close($conn);
-    } 
+    }
     else{
         echo "Kan geen verbinding maken met de database .<br />";
         die( print_r( sqlsrv_errors(), true));
     }
 }
 
-function returnProduct($conn, $pid) {
+function printProductenPagina() {
+    $tsql = "SELECT * from PRODUCT";
+    printProductenDiv($tsql);
+}
+
+function gerelateerdeProduct($pid){
+    $tsql = "SELECT * from PRODUCT WHERE PRODUCTNUMMER = $pid";
+    printProductenDiv($tsql);
+}
+
+function zoekProducten($zoekTekst) {
+    $tsql = "SELECT * FROM PRODUCT WHERE PRODUCTNAAM like '%$zoekTekst%';";
+    printProductenDiv($tsql);
+}
+
+function printMerken($merk) {
+    $tsql = "SELECT * FROM PRODUCT WHERE MERK = '$merk';";
+    printProductenDiv($tsql);
+}
+
+function returnProduct($pid) {
+    $conn = dbConnected();
     if($conn)
     {
-
         $tsql = "SELECT * from PRODUCT WHERE PRODUCTNUMMER = $pid";
         $result = sqlsrv_query( $conn, $tsql, null);
         if ( $result === false)
@@ -76,8 +93,6 @@ function returnProduct($conn, $pid) {
             die( print_r( sqlsrv_errors() ) );
         }
         while( $row = sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC)) {
-
-            $productnaam = $row['PRODUCTNAAM'];
             return $row;
         }
         sqlsrv_free_stmt($result);
@@ -89,46 +104,11 @@ function returnProduct($conn, $pid) {
     }
 }
 
-function gerelateerdeProduct($conn, $pid){
+
+function getGerelateerdeProduct($pid){
+    $conn = dbConnected();
     if($conn)
     {
-        $tsql = "SELECT * from PRODUCT WHERE PRODUCTNUMMER = $pid";
-        $result = sqlsrv_query( $conn, $tsql, null);
-        if ( $result === false)
-        {
-            die( print_r( sqlsrv_errors() ) );
-        }
-        while( $row = sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC)) { ?>
-            <?php   echo ' <div class="product">';
-            echo '<h3>';
-            echo  $row['MERK'];
-            echo '</h3>';
-            echo '<a href="productpagina.php&#63;id=';
-            echo $row['PRODUCTNUMMER'];
-            echo '"><img  src="';
-            echo $row['AFBEELDING_GROOT'];
-            echo '" alt="calvin-pantalon"></a>';
-            echo '<p>';
-            echo  $row['PRODUCTNAAM'];
-            echo '</p>';
-            echo '<p><span>';
-            echo $row['PRIJS'];
-            echo '</span> <button type="button" >In Winkelwagen</button></p>';
-            echo '</div>';
-            
-        } ?>
-        <?php   sqlsrv_free_stmt($result);
-
-    } else
-    {
-        echo "Connection could not be established.<br />";
-        die( print_r( sqlsrv_errors(), true));
-    }
-}
-function getGerelateerdeProduct($conn, $pid){
-    if($conn)
-    {
-
         $tsql = "SELECT PRODUCTNUMMER_GERELATEERD_PRODUCT FROM PRODUCT_GERELATEERD_PRODUCT INNER JOIN PRODUCT  ON PRODUCT.PRODUCTNUMMER  = PRODUCT_GERELATEERD_PRODUCT.PRODUCTNUMMER  WHERE PRODUCT.PRODUCTNUMMER = $pid";
         $result = sqlsrv_query( $conn, $tsql, null);
         if ( $result === false)
@@ -136,7 +116,7 @@ function getGerelateerdeProduct($conn, $pid){
             die( print_r( sqlsrv_errors() ) );
         }
         while( $row = sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC)) {
-            gerelateerdeProduct($conn, $row['PRODUCTNUMMER_GERELATEERD_PRODUCT']);
+            gerelateerdeProduct($row['PRODUCTNUMMER_GERELATEERD_PRODUCT']);
 
         }
         sqlsrv_free_stmt($result);
@@ -146,6 +126,33 @@ function getGerelateerdeProduct($conn, $pid){
         echo "Connection could not be established.<br />";
         die( print_r( sqlsrv_errors(), true));
     }
+}
+
+function printMerkenKnop(){
+
+    $conn = dbConnected();
+    if($conn){
+
+        $tsql = "SELECT DISTINCT MERK FROM PRODUCT;";
+        $result = sqlsrv_query( $conn, $tsql, null);
+        if ( $result === false){
+            die( print_r( sqlsrv_errors() ) );
+        }
+        while( $row = sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC)) {
+            echo '<div class="catogorie"><a href="productlijst.php&#63;merk=';
+            echo $row['MERK'];
+            echo '">';
+            echo $row['MERK'];
+            echo '</a></div>';
+        }
+        sqlsrv_free_stmt($result);
+        sqlsrv_close($conn);
+    }
+    else{
+        echo "Kan geen verbinding maken met de database .<br />";
+        die( print_r( sqlsrv_errors(), true));
+    }
+
 }
 
 // function test_input($data) {
@@ -154,81 +161,4 @@ function getGerelateerdeProduct($conn, $pid){
 //   $data = htmlspecialchars($data);
 //   return $data;
 // }
-
-function zoekProducten($conn, $zoekTekst) {
-
-    if($conn){
-
-        $tsql = "SELECT * FROM PRODUCT WHERE PRODUCTNAAM like '%$zoekTekst%';";
-        $result = sqlsrv_query( $conn, $tsql, null);
-        if ( $result === false){
-            die( print_r( sqlsrv_errors() ) );
-        }
-        while( $row = sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC)) {
-            echo '<div class="product">';
-            echo '<h3>';
-            echo  $row['MERK'];
-            echo '</h3>';
-            echo '<a href="productpagina.php&#63;id=';
-            echo $row['PRODUCTNUMMER'];
-            echo '"><img  src="';
-            echo $row['AFBEELDING_GROOT'];
-            echo '" alt="calvin-pantalon"></a>';
-            echo '<p>';
-            echo  $row['PRODUCTNAAM'];
-            echo '</p>';
-            echo '<p><span>';
-            echo $row['PRIJS'];
-            echo '</span> <button type="button" >In Winkelwagen</button></p>';
-            echo '</div>';
-            $productcode = $row['PRODUCTNUMMER'];
-            $_SESSION['productcode']= $productcode;
-        }
-        sqlsrv_free_stmt($result);
-        sqlsrv_close($conn);
-    }
-    else{
-        echo "Kan geen verbinding maken met de database .<br />";
-        die( print_r( sqlsrv_errors(), true));
-    }
-}
-function printMerken($conn,$merk) {
-
-    if($conn){
-
-        $tsql = "SELECT * FROM PRODUCT WHERE MERK = '$merk';";
-        $result = sqlsrv_query( $conn, $tsql, null);
-        if ( $result === false){
-            die( print_r( sqlsrv_errors() ) );
-        }
-        while( $row = sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC)) {
-            echo '<div class="product">';
-            echo '<h3>';
-            echo  $row['MERK'];
-            echo '</h3>';
-            echo '<a href="productpagina.php&#63;id=';
-            echo $row['PRODUCTNUMMER'];
-            echo '"><img  src="';
-            echo $row['AFBEELDING_GROOT'];
-            echo '" alt="calvin-pantalon"></a>';
-            echo '<p>';
-            echo  $row['PRODUCTNAAM'];
-            echo '</p>';
-            echo '<p><span>';
-            echo $row['PRIJS'];
-            echo '</span> <button type="button" >In Winkelwagen</button></p>';
-            echo '</div>';
-            $productcode = $row['PRODUCTNUMMER'];
-            $_SESSION['productcode']= $productcode;
-        }
-        sqlsrv_free_stmt($result);
-        sqlsrv_close($conn);
-    }
-    else{
-        echo "Kan geen verbinding maken met de database .<br />";
-        die( print_r( sqlsrv_errors(), true));
-    }
-
-}
-
 ?>

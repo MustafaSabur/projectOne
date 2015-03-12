@@ -45,21 +45,19 @@
 						</p>
 					</div>
 					<div id="merkmenu">
+                        <?php printMerkenKnop(); ?>
 
-                            <div class="catogorie"><a href="productlijst.php&#63;merk=Calvin Klein">Calvin Klein</a></div>
-                            <div class="catogorie"><a href="productlijst.php&#63;merk=Ralph Lauren">Ralph Lauren</a></div>
-                            <div class="catogorie"><a href="productlijst.php&#63;merk=Hugo Boss">Hugo Boss</a></div>
 
 					</div>
 
                     <?php if (empty($_GET['zoekTerm']) && empty($_GET['merk'])){
-                        printProductenPagina(dbConnected());
+                        printProductenPagina();
                     }
                     elseif(isset($_GET['merk'])){
-                        printMerken(dbConnected(), $_GET['merk']);
+                        printMerken($_GET['merk']);
                     }
                     else {
-                        zoekProducten(dbConnected(), $_GET['zoekTerm']);
+                        zoekProducten($_GET['zoekTerm']);
                     } ?>
 					
 				</div>
