@@ -155,4 +155,42 @@ function getGerelateerdeProduct($conn, $pid){
 //   return $data;
 // }
 
+function zoekProducten($conn, $zoekTekst) {
+
+    if($conn){
+
+        $tsql = "SELECT * FROM PRODUCT WHERE PRODUCTNAAM like '%$zoekTekst%';";
+        $result = sqlsrv_query( $conn, $tsql, null);
+        if ( $result === false){
+            die( print_r( sqlsrv_errors() ) );
+        }
+        while( $row = sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC)) {
+            echo '<div class="product">';
+            echo '<h3>';
+            echo  $row['MERK'];
+            echo '</h3>';
+            echo '<a href="productpagina.php&#63;id=';
+            echo $row['PRODUCTNUMMER'];
+            echo '"><img  src="';
+            echo $row['AFBEELDING_GROOT'];
+            echo '" alt="calvin-pantalon"></a>';
+            echo '<p>';
+            echo  $row['PRODUCTNAAM'];
+            echo '</p>';
+            echo '<p><span>';
+            echo $row['PRIJS'];
+            echo '</span> <button type="button" >In Winkelwagen</button></p>';
+            echo '</div>';
+            $productcode = $row['PRODUCTNUMMER'];
+            $_SESSION['productcode']= $productcode;
+        }
+        sqlsrv_free_stmt($result);
+        sqlsrv_close($conn);
+    }
+    else{
+        echo "Kan geen verbinding maken met de database .<br />";
+        die( print_r( sqlsrv_errors(), true));
+    }
+}
+
 ?>

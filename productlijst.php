@@ -14,6 +14,7 @@
 	<?php 
 		require 'includes/core.php';
 		include 'includes/functions.php';
+        $search = false;
 	?>
 </head>
 
@@ -25,8 +26,12 @@
 				<h1>WINKEL</h1>
 				<div id="productlijst">
 					<div class="zoekfunctie">
-						<p><input type="text" placeholder="Zoektermen ingeven">
-						<input type="button" value="Zoeken"></p>
+						<p>
+                            <form action ="productlijst.php" method="get">
+                                <input type="text" placeholder="Zoektermen ingeven" name = "zoekTekst">
+                                <input  type="submit" value="Zoeken">
+                            </form>
+                        </p>
 					</div>
 					<div class="nPerPagina">
 						<p>1367 Producten | Toon
@@ -44,7 +49,13 @@
 						<div class="catogorie"><a href="#">Ralph Lauren</a></div>
 						<div class="catogorie"><a href="#">Hugo Boss</a></div>
 					</div>
-					<?php  printProductenPagina(dbConnected()); ?>
+
+                    <?php if (empty($_GET['zoekTekst'])){
+                        printProductenPagina(dbConnected());
+                    }
+                    else {
+                        zoekProducten(dbConnected(), $_GET['zoekTekst']);
+                    } ?>
 					
 				</div>
 			</div>
