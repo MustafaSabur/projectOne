@@ -28,7 +28,7 @@
 					<div class="zoekfunctie">
 						<p>
                             <form action ="productlijst.php" method="get">
-                                <input type="text" placeholder="Zoektermen ingeven" name = "zoekTekst">
+                                <input type="text" placeholder="Zoektermen ingeven" name = "zoekTerm">
                                 <input  type="submit" value="Zoeken">
                             </form>
                         </p>
@@ -45,16 +45,21 @@
 						</p>
 					</div>
 					<div id="merkmenu">
-						<div class="catogorie"><a href="#">Calvin Klein</a></div>
-						<div class="catogorie"><a href="#">Ralph Lauren</a></div>
-						<div class="catogorie"><a href="#">Hugo Boss</a></div>
+
+                            <div class="catogorie"><a href="productlijst.php&#63;merk=Calvin Klein">Calvin Klein</a></div>
+                            <div class="catogorie"><a href="productlijst.php&#63;merk=Ralph Lauren">Ralph Lauren</a></div>
+                            <div class="catogorie"><a href="productlijst.php&#63;merk=Hugo Boss">Hugo Boss</a></div>
+
 					</div>
 
-                    <?php if (empty($_GET['zoekTekst'])){
+                    <?php if (empty($_GET['zoekTerm']) && empty($_GET['merk'])){
                         printProductenPagina(dbConnected());
                     }
+                    elseif(isset($_GET['merk'])){
+                        printMerken(dbConnected(), $_GET['merk']);
+                    }
                     else {
-                        zoekProducten(dbConnected(), $_GET['zoekTekst']);
+                        zoekProducten(dbConnected(), $_GET['zoekTerm']);
                     } ?>
 					
 				</div>
