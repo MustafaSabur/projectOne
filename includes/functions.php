@@ -63,6 +63,89 @@ function printProductenPagina($conn) {
     }
 }
 
+function returnProduct($conn, $pid) {
+    if($conn)
+    {
+
+        $tsql = "SELECT * from PRODUCT WHERE PRODUCTNUMMER = $pid";
+        $result = sqlsrv_query( $conn, $tsql, null);
+        if ( $result === false)
+        {
+            die( print_r( sqlsrv_errors() ) );
+        }
+        while( $row = sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC)) {
+
+            $productnaam = $row['PRODUCTNAAM'];
+            return $row;
+        }
+        sqlsrv_free_stmt($result);
+        sqlsrv_close($conn);
+    } else
+    {
+        echo "Connection could not be established.<br />";
+        die( print_r( sqlsrv_errors(), true));
+    }
+}
+
+function gerelateerdeProduct($conn, $pid){
+    if($conn)
+    {
+        $tsql = "SELECT * from PRODUCT WHERE PRODUCTNUMMER = $pid";
+        $result = sqlsrv_query( $conn, $tsql, null);
+        if ( $result === false)
+        {
+            die( print_r( sqlsrv_errors() ) );
+        }
+        while( $row = sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC)) { ?>
+            <?php   echo ' <div class="product">';
+            echo '<h3>';
+            echo  $row['MERK'];
+            echo '</h3>';
+            echo '<a href="productpagina.php&#63;id=';
+            echo $row['PRODUCTNUMMER'];
+            echo '"><img  src="';
+            echo $row['AFBEELDING_GROOT'];
+            echo '" alt="calvin-pantalon"></a>';
+            echo '<p>';
+            echo  $row['PRODUCTNAAM'];
+            echo '</p>';
+            echo '<p><span>';
+            echo $row['PRIJS'];
+            echo '</span> <button type="button" >In Winkelwagen</button></p>';
+            echo '</div>';
+            
+        } ?>
+        <?php   sqlsrv_free_stmt($result);
+
+    } else
+    {
+        echo "Connection could not be established.<br />";
+        die( print_r( sqlsrv_errors(), true));
+    }
+}
+function getGerelateerdeProduct($conn, $pid){
+    if($conn)
+    {
+
+        $tsql = "SELECT PRODUCTNUMMER_GERELATEERD_PRODUCT FROM PRODUCT_GERELATEERD_PRODUCT INNER JOIN PRODUCT  ON PRODUCT.PRODUCTNUMMER  = PRODUCT_GERELATEERD_PRODUCT.PRODUCTNUMMER  WHERE PRODUCT.PRODUCTNUMMER = $pid";
+        $result = sqlsrv_query( $conn, $tsql, null);
+        if ( $result === false)
+        {
+            die( print_r( sqlsrv_errors() ) );
+        }
+        while( $row = sqlsrv_fetch_array( $result, SQLSRV_FETCH_ASSOC)) {
+            gerelateerdeProduct($conn, $row['PRODUCTNUMMER_GERELATEERD_PRODUCT']);
+
+        }
+        sqlsrv_free_stmt($result);
+        sqlsrv_close($conn);
+    } else
+    {
+        echo "Connection could not be established.<br />";
+        die( print_r( sqlsrv_errors(), true));
+    }
+}
+
 // function test_input($data) {
 //   $data = trim($data);
 //   $data = stripslashes($data);
