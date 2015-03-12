@@ -23,16 +23,13 @@
 			<?php include 'includes/header.php'; include 'includes/menu.php'; ?>
 			<div id="content">
 				<h1>REGISTREREN</h1>
-				<div class="errors">
-				<?php include 'includes/createaccount.php' ?>
-				</div>
-				 
+				 <?php include 'includes/createaccount.php' ?>
 				<form class="registreren" method="post" action="<?= $_SERVER['SCRIPT_NAME']?>">
 					<fieldset class="row1">
 		                <legend>Account Gegevens</legend>
 		                <p>
 		                    <label>Gebruikersnaam *</label>
-		                    <input type="text" name="username" value="<?= $username_test;?>"/>
+		                    <input type="text" name="username" />
 		                </p>
 		                <p>
 		                    <label>Herhaal Gebruikersnaam *</label>
@@ -51,39 +48,43 @@
 		                <legend>Factuuradres</legend>
 		                <p>
 		                    <label>Voornaam *</label>
-		                    <input type="text" name="firstname" class="long" value="<?= $firstname_test;?>" />
+		                    <input type="text" name="firstname" class="long"/>
 		                </p>
 		                <p>
 		                    <label>Tussenv.</label>
-		                    <input type="text" name="prefix" class="long" value="<?= $prefix_test;?>"/>
+		                    <input type="text" name="prefix" class="long"/>
 		                </p>
 		                <p>
 		                    <label>Achternaam *</label>
-		                    <input type="text" name="lastname" class="long" value="<?= $lastname_test;?>"/>
+		                    <input type="text" name="lastname" class="long"/>
 		                </p>
 		                <p>
 		                    <label>Emailadres *</label>
-		                    <input type="email" name="email" class="long" value="<?= $email_test;?>"/>
+		                    <input type="email" name="email" class="long"/>
+		                </p>
+		                <p>
+		                    <label>Telefoon *</label>
+		                    <input type="text" name="telephone" maxlength="10"/>
 		                </p>
 		                <p>
 		                    <label>Straatnaam *</label>
-		                    <input type="text" name="street" class="long" value="<?= $street_test;?>"/>
+		                    <input type="text" name="street" class="long"/>
 		                </p>
 		                <p>
 		                    <label>Huisnummer *</label>
-		                    <input type="text" name="streetnumber" class="long" value="<?= $streetnumber_test;?>"/>
+		                    <input type="text" name="streetnumber" class="long"/>
 		                </p>
 		                <p>
 		                    <label>Postcode *</label>
-		                    <input type="text" name="postalcode" class="long" value="<?= $postalcode_test;?>"/>
+		                    <input type="text" name="postalcode" class="long"/>
 		                </p>
 		                <p>
 		                    <label>Plaatsnaam *</label>
-		                    <input type="text" name="city" class="long" value="<?= $city_test;?>"/>
+		                    <input type="text" name="city" class="long"/>
 		                </p>
 		                <p>
 		                    <label>Geslacht *</label>
-		                    <input type="radio" name="gender" class="radio" value="M" checked="checked" />
+		                    <input type="radio" name="gender" class="radio" value="M"/>
 		                    <label class="gender">Man</label>
 		                    <input type="radio" name="gender" class="radio" value="V"/>
 		                    <label class="gender">Vrouw</label>
@@ -143,7 +144,7 @@
 		            <fieldset class="row3">
 		                <legend>Voorwaarden</legend>
 		                <p class="agreement">
-		                    <input type="checkbox" class="checkbox" name="acptterms" value="Yes"/>
+		                    <input type="checkbox" class="checkbox" value=""/>
 		                    <label>* Ik accepteer de <a href="#">Voorwaarden</a>.</label>
 		                </p>
 		                <p class="agreement">
