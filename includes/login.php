@@ -1,7 +1,7 @@
 <?php 
 if (isset($_POST['login']) && isset($_POST['password'])){
 	$user = $_POST['login'];
-	$password = $_POST['password'];
+	$password = md5($_POST['password']);
 	login($user, $password, dbConnected());
 
 	// $logStatus = login($user, $password, dbConnected());
