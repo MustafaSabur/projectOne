@@ -99,13 +99,18 @@ img {
 #menu {
 	margin: auto;
 	text-align: center;
+	position: fixed;
+	top: 6.5em;
+	left: 1em;
+	width: calc(100% - 196px);
 }
 
 .optie {
 	display: inline-block;
-	margin-top: 5.5em;	
+	margin: 0;	
 	vertical-align: top;
 	width: 18%;
+	z-index: 20;
 }
 
 .optie a:hover {
@@ -124,7 +129,7 @@ img {
 .optie:hover .submenu {
 	display:block;
 	position: absolute;
-	width: 15.8%;
+	width: 18%;
 }
 
 .optie a {
@@ -149,7 +154,7 @@ ul {
 #content {
 	background-color: rgba(255,255,255,0.6);
 	font-family: Arial;
-	margin: 1em auto;
+	margin: 8em auto;
 	text-align: center;
 	width: 80%;
 }
