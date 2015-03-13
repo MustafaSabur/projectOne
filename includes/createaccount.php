@@ -176,7 +176,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if ($acptterms && !empty($username) && !empty($firstname) && !empty($lastname) && !empty($street) && !empty($streetnumber) && !empty($postalcode) && !empty($city) && !empty($email) && !empty($gender) && !empty($password)) {
 	$query = "INSERT INTO GEBRUIKER VALUES ('$username','$firstname',$prefix,'$lastname','$street',$streetnumber,'$postalcode','$city','$email','$gender','$password')";
 
-		echo $query;
 		$result = sqlsrv_query(dbConnected(), $query);
 
 		if ($result) {

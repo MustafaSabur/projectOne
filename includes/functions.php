@@ -1,8 +1,9 @@
 <?php
 
 function ads(){
-	$source= array("ad1.png", "ad2.gif", "ad3.jpg", "ad4.gif", "ad5.jpg", "ad6.png");
-	return $source[rand(0,5)];
+	//$source= array("ad1.png", "ad2.gif", "ad3.jpg", "ad4.gif", "ad5.jpg", "ad6.png");
+	$source = glob("images/ads/ad*.{jpg,gif,png}", GLOB_BRACE);
+    return $source[rand(0,count($source))];
 }
 
 function dbConnected(){

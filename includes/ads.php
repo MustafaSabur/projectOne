@@ -1,5 +1,5 @@
 
 <div id="ads">
-	<img src=<?= "images/".ads();?> alt="ad4">
+	<img src="<?= ads();?>" alt="<?= ads();?>">
 	<p>Advertentie</p>
 </div>
